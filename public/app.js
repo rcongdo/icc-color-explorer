@@ -79,7 +79,7 @@ function clampNumber(value, min, max, fallback) {
 }
 
 async function loadProfiles(selectPath) {
-  const response = await fetch("/api/profiles", { cache: "no-store" });
+  const response = await fetch("api/profiles", { cache: "no-store" });
   const data = await response.json();
   elements.profile.innerHTML = "";
   for (const profile of data.profiles) {
@@ -179,7 +179,7 @@ async function uploadProfile(file) {
 
   elements.status.classList.remove("error");
   elements.status.textContent = "Uploading profile...";
-  const response = await fetch("/api/upload-profile", {
+  const response = await fetch("api/upload-profile", {
     method: "POST",
     headers: {
       "Content-Type": "application/octet-stream",
@@ -277,7 +277,7 @@ async function convert() {
   updateInputText();
 
   try {
-    const response = await fetch("/api/convert", {
+    const response = await fetch("api/convert", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       cache: "no-store",
