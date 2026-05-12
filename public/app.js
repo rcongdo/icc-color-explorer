@@ -33,6 +33,7 @@ const elements = {
   profileText: document.querySelector("#profileText"),
   outputLabText: document.querySelector("#outputLabText"),
   deltaReadout: document.querySelector("#deltaReadout"),
+  deltaIndicator: document.querySelector("#deltaIndicator"),
   deltaText: document.querySelector("#deltaText"),
 };
 
@@ -131,6 +132,22 @@ function formatCmyk(cmyk) {
 
 function formatRgb(rgb) {
   return `rgb(${rgb.r} ${rgb.g} ${rgb.b})`;
+}
+
+function updateDeltaIndicator(delta) {
+  let level = "high";
+  let label = "Delta E higher than 3";
+  if (delta < 2) {
+    level = "low";
+    label = "Delta E under 2";
+  } else if (delta <= 3) {
+    level = "medium";
+    label = "Delta E between 2 and 3";
+  }
+
+  elements.deltaIndicator.className = `delta-indicator ${level}`;
+  elements.deltaIndicator.setAttribute("aria-label", label);
+  elements.deltaIndicator.title = label;
 }
 
 function updateInputText() {
@@ -282,7 +299,8 @@ async function convert() {
     elements.cmykText.textContent = formatCmyk(data.cmyk);
     elements.profileText.textContent = activeProfileLabel();
     elements.outputLabText.textContent = formatLab(data.outputLab);
-    elements.deltaText.textContent = delta.toFixed(3);
+    elements.deltaText.textContent = delta.toFixed(2);
+    updateDeltaIndicator(delta);
     elements.status.textContent = "Live";
   } catch (error) {
     if (error.name === "AbortError") return;

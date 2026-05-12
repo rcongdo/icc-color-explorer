@@ -271,6 +271,33 @@ input[type="number"] {
   overflow-wrap: anywhere;
 }
 
+.delta-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delta-indicator {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d13f32;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 12%);
+}
+
+.delta-indicator.low {
+  background: #2e9b57;
+}
+
+.delta-indicator.medium {
+  background: #d7831e;
+}
+
+.delta-indicator.high {
+  background: #d13f32;
+}
+
 @media (max-width: 860px) {
   .app-shell {
     grid-template-columns: 1fr;
