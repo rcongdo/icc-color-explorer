@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ICC Color Explorer</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="controls" aria-label="Color controls">
+        <div class="topline">
+          <h1>ICC Color Explorer</h1>
+          <p id="status" class="status">Loading profiles...</p>
+        </div>
+
+        <div class="mode-control" aria-label="Input color mode">
+          <button class="active" type="button" data-mode="lab">Lab</button>
+          <button type="button" data-mode="cmyk">CMYK</button>
+        </div>
+
+        <label class="field">
+          <span>ICC profile</span>
+          <select id="profile" autocomplete="off"></select>
+        </label>
+
+        <div id="dropZone" class="drop-zone" role="button" tabindex="0">
+          <strong>Drop ICC profile</strong>
+          <span>or click to choose .icc / .icm</span>
+          <input id="profileFile" type="file" accept=".icc,.icm">
+        </div>
+
+        <label class="field">
+          <span>Custom profile path</span>
+          <input id="customProfile" type="text" spellcheck="false" autocomplete="off" placeholder="/Library/ColorSync/Profiles/profile.icc">
+        </label>
+
+        <label class="field">
+          <span>Rendering intent</span>
+          <select id="intent" autocomplete="off">
+            <option value="relative">Relative colorimetric</option>
+            <option value="perceptual">Perceptual</option>
+            <option value="saturation">Saturation</option>
+            <option value="absolute">Absolute colorimetric</option>
+          </select>
+        </label>
+
+        <div class="sliders" id="sliders"></div>
+      </section>
+
+      <section class="output" aria-label="Converted color">
+        <div class="swatch" aria-label="Input and output color preview">
+          <div id="inputSwatch" class="swatch-half input">
+            <span>Input color</span>
+          </div>
+          <div id="outputSwatch" class="swatch-half result">
+            <span>Profile output</span>
+          </div>
+        </div>
+        <div class="readouts">
+          <div>
+            <span id="inputLabel" class="label">Input Lab</span>
+            <strong id="inputText">L*55.00 a*25.00 b*20.00</strong>
+          </div>
+          <div id="cmykReadout">
+            <span class="label">CMYK from profile</span>
+            <strong id="cmykText">0.0% 0.0% 0.0% 0.0%</strong>
+          </div>
+          <div>
+            <span class="label">Active profile</span>
+            <strong id="profileText">-</strong>
+          </div>
+          <div>
+            <span class="label">Lab from profile</span>
+            <strong id="outputLabText">L*55.00 a*25.00 b*20.00</strong>
+          </div>
+          <div id="deltaReadout">
+            <span class="label">Delta E 2000</span>
+            <strong id="deltaText">0.000</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
